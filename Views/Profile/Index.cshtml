@@ -1,0 +1,106 @@
+@model ogrencievin.Models.Entities.User
+<style>
+    .profile-head {
+    transform: translateY(2rem)
+}
+
+.cover {
+    background-image: url(https://images.unsplash.com/photo-1530305408560-82d13781b33a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1352&q=80);
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+body {
+    background-image: url("/Images/pexels-binyamin-mellish-106399.jpg");
+   background-size:     cover;                      /* <------ */
+   background-repeat:   no-repeat;
+   background-position: center center;   
+   height: 960px;
+   margin:0;
+   padding:0;
+    min-height: 100vh;
+    overflow-x:hidden;
+}
+</style>
+<div class="row py-2 px-2">
+  <div class="col-md-8 mx-auto">
+    <div class="bg-white shadow rounded overflow-hidden">
+      <div class="px-4 pt-0 pb-4 cover">
+        <div class="media align-items-end profile-head">
+          <div class="media-body mb-5 text-white">
+            <h4 class="mt-0 mb-0">@Model.UserName</h4>
+            <label class="primary">Seviye @ViewData["publishes"]</label>
+            <div class="progress">
+              <div class="progress-bar bg-warning" role="progressbar" style='width: @ViewData["publishes"]%' aria-valuenow='@ViewData["publishes"]' aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+          </div>
+          <div>
+            
+          </div>
+        </div>
+      </div>
+      <div class="px-4 py-3">
+        <h5 class="mb-0">Secenekler</h5>
+        <div class="p-4 rounded shadow-sm bg-light">
+          <a href=# class="btn btn-primary">Profili Duzenle</a>
+          <a href='/Publish/Index' class="btn btn-secondary">Yeni Yukle</a>
+          <a href='/Profile/Publishes' class="btn btn-warning">Yuklenenleri Goruntule</a>
+          <a href='/Home/Index' class="btn btn-danger">Ana Sayfaya Don</a>
+        </div>
+      </div>
+      <div class="py-4 px-4">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+          <h5 class="mb-0">Favoriler</h5>
+        </div>
+        <div class="row">
+          
+          @if(ViewData["estates"] != null){
+          @foreach(var item in ViewData["estates"] as IEnumerable<ogrencievin.Models.Entities.Estate>){
+<div class="row justify-content-center mb-3">
+        <div class="col-md-12 col-xl-10">
+          <div class="card shadow-0 border rounded-3">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-12 col-lg-3 col-xl-3 mb-4 mb-lg-0">
+                  <div class="bg-image hover-zoom ripple rounded ripple-surface">
+                    <img src='~/Images/@item.images[0].imagePath' class="w-100"/>
+                    <a href="#!">
+                      <div class="hover-overlay">
+                        <div class="mask" style="background-color: rgba(253, 253, 253, 0.15);"></div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+                <div class="col-md-6 col-lg-6 col-xl-6">
+                  <h5>@item.title</h5>
+                  <div class="mt-1 mb-0 text-muted small">
+                    <span class="text-primary"> @item.address </span>
+                  </div>
+                  <div class="mb-2 text-muted small">
+                    <span class="text-primary"> @item.rooms </span>
+                  </div>
+                  <p class="text-truncate mb-4 mb-md-0">
+                    @item.descriptions
+                  </p>
+                </div>
+                <div class="col-md-6 col-lg-3 col-xl-3 border-sm-start-none border-start">
+                  
+                  <div class="d-flex flex-column mt-4">
+                    @Html.ActionLink("Detaylar","Details","Home",new {id=item.id},new {@class="btn btn-primary btn-sm"})
+                    @Html.ActionLink("Favorilerden Cikar","Unfavorite","Profile",new {id=item.id},new {@class=" btn btn-outline-primary btn-sm mt-2"})
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+    }
+          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

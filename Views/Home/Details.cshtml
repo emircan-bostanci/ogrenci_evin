@@ -1,0 +1,66 @@
+@model ogrencievin.Models.Entities.Estate;
+@{
+    string filePath = hostEnvironment.WebRootPath+ "\\Images";
+}
+<style>
+    .card{border:none}.product{background-color: #eee}.brand{font-size: 13px}.act-price{color:red;font-weight: 700}.dis-price{text-decoration: line-through}.about{font-size: 14px}.color{margin-bottom:10px}label.radio{cursor: pointer}label.radio input{position: absolute;top: 0;left: 0;visibility: hidden;pointer-events: none}label.radio span{padding: 2px 9px;border: 2px solid #ff0000;display: inline-block;color: #ff0000;border-radius: 3px;text-transform: uppercase}label.radio input:checked+span{border-color: #ff0000;background-color: #ff0000;color: #fff}.btn-danger{background-color: #ff0000 !important;border-color: #ff0000 !important}.btn-danger:hover{background-color: #da0606 !important;border-color: #da0606 !important}.btn-danger:focus{box-shadow: none}.cart i{margin-right: 10px}
+</style>
+<script>
+    function change_image(image){
+        var container = document.getElementById("main-image");
+        container.src = image.src;
+    }
+    document.addEventListener("DOMContentLoaded", function(event) {
+    });
+</script>
+<div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modallabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+       Telefon Numarasi = @Html.DisplayFor(p => p.author.PhoneNumber)
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container mt-5 mb-5">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="images p-3">
+                            <div class="text-center p-4"> <img id="main-image" src='~/Images/@Model.images[0].imagePath' width="500" /> </div>
+                            <div class="thumbnail text-center"> 
+                                @foreach (var item in Model.images)
+                                {
+                                    <img onclick="change_image(this)" src='~/Images/@item.imagePath' width="70"> 
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="product p-4 h-100">
+                            <div class="mt-4 mb-3">
+                                <h5 class="text-uppercase">@Model.title</h5>
+                            </div>
+                            <p class="about">@Model.descriptions</p>
+                            <div class="mt-2">
+                                @Model.address
+                            </div>
+                            <div class="cart mt-4 align-items-center">
+                                <button data-bs-toggle="modal" data-bs-target="#modal" class="btn btn-outline-danger text-uppercase mr-2 px-4">Iletisime Gec</button> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> 
+                                <a href="/Messaging/Dm/@Model.author.Id" class="btn btn-outline-danger text-uppercase mr-2 px-4">Mesaj Yolla</a> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i> 
+                                <a href="/Home/AddToFavorite?postId=@Model.id" class="btn btn-primary text-uppercase mr-2 px-4">Favorilere Ekle</a> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>  
+                                @*<a href="/Message/Index?authorId=@Model.author.id" class="btn btn-primary text-uppercase mr-2 px-4">Favorilere Ekle</a> <i class="fa fa-heart text-muted"></i> <i class="fa fa-share-alt text-muted"></i>  
+                                *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

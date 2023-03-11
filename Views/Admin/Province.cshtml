@@ -1,0 +1,8 @@
+@{
+    ViewData["Title"] = "Adres Ekle";
+}
+
+@using(Html.BeginForm(FormMethod.Post)){
+    @Html.TextArea("addresses")
+    <input type="submit">
+}
