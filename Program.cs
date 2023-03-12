@@ -24,11 +24,11 @@ builder.Services.AddScoped<IRepository<User>,Repository<User>>();
 
 
 builder.Services.AddIdentity<User,IdentityRole>(_ => {
-    _.Password.RequiredLength = 5; //En az kaç karakterli olması gerektiğini belirtiyoruz.
-    _.Password.RequireNonAlphanumeric = false; //Alfanumerik zorunluluğunu kaldırıyoruz.
-    _.Password.RequireLowercase = true; //Küçük harf zorunluluğunu kaldırıyoruz.
-    _.Password.RequireUppercase = true; //Büyük harf zorunluluğunu kaldırıyoruz.
-    _.Password.RequireDigit = true; //0-9 arası sayısal karakter zorunluluğunu kaldırıyoruz.
+    _.Password.RequiredLength = 5; 
+    _.Password.RequireNonAlphanumeric = false; 
+    _.Password.RequireLowercase = true; 
+    _.Password.RequireUppercase = true; 
+    _.Password.RequireDigit = true;
  
 }).AddErrorDescriber<CustomIdentityErrorDescriber>().AddEntityFrameworkStores<Context>();
 //Authentiation
